@@ -30,5 +30,26 @@ module.exports = {
         } catch (error) {
             response.error(req, res, error.message, 500);
         }
+    },
+    //Login de usuario.
+    loginUser: async (req, res) => {
+        try {
+            const {username, password}= req.body;
+            const user = await userServices.loginUser(username,password);
+            response.success(req, res, user, 200);
+        } catch (error) {
+            response.error(req, res, error.message, 500);
+        }
+    },
+    // Actualizar un usuario.
+    updateUser: async (req, res) => {
+        try {
+            const userId = req.params.id;
+            const userData = req.body;
+            const user = await userServices.updateUser(userId,userData);
+            response.success(req, res, user, 200);
+        } catch (error) {
+            response.error(req, res, error.message, 500);
+        }
     }
 }
